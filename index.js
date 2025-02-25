@@ -35,9 +35,9 @@ app.post("/post-blog", async (req, res) => {
 
 // get 
 app.get("/get-blogs", async (req, res) => {
-  console.log("hit")
+  // console.log("hit")
     let blogs = await BlogPost.find();
-    console.log(blogs)
+    // console.log(blogs)
     if (!blogs) {
         res.status(400).json({ message: "No blog found" });
     } else {
