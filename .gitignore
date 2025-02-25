@@ -1,0 +1,6 @@
+git rm --cached client
+rm -rf .git/modules/client
+git commit -m "Removed client as submodule"
+git add client
+git commit -m "Added client directory"
+git push origin main

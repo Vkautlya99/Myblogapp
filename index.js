@@ -13,13 +13,14 @@ connectDb();
 // Middlewares
 app.use(express.json());
 app.use(cors());
-app.use((req, res, next) => {
-    express.static(path.join(__dirname, "client", "dist"))(req, res, next);
-});
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+
+app.use(express.static(path.join(__dirname, "dist")));
+
+
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "dist", "index.html"));
+// });
 
 // Routes
 app.post("/post-blog", async (req, res) => {
@@ -32,8 +33,11 @@ app.post("/post-blog", async (req, res) => {
     res.json({ message: "Post has been created" });
 });
 
+// get 
 app.get("/get-blogs", async (req, res) => {
+  console.log("hit")
     let blogs = await BlogPost.find();
+    console.log(blogs)
     if (!blogs) {
         res.status(400).json({ message: "No blog found" });
     } else {
